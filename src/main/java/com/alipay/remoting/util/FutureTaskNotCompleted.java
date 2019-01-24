@@ -14,19 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alipay.remoting;
+package com.alipay.remoting.util;
 
 /**
- * Async context for biz.
- * 
- * @author xiaomin.cxm
- * @version $Id: AsyncContext.java, v 0.1 May 19, 2016 2:19:05 PM xiaomin.cxm Exp $
+ * @author chengyi (mark.lx@antfin.com) 2018-10-18 16:30
  */
-public interface AsyncContext {
-    /**
-     * send response back
-     * 
-     * @param responseObject
-     */
-    void sendResponse(Object responseObject);
+public class FutureTaskNotCompleted extends Exception {
+
+    private static final long serialVersionUID = -3635466558774380138L;
+
+    public FutureTaskNotCompleted() {
+    }
+
+    public FutureTaskNotCompleted(String message) {
+        super(message);
+    }
+
+    public FutureTaskNotCompleted(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
