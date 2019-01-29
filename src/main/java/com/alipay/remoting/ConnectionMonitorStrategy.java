@@ -23,7 +23,7 @@ import com.alipay.remoting.util.RunStateRecordedFutureTask;
 
 /**
  * The strategy of connection monitor
- *
+ * 连接监控策略接口
  * @author tsui
  * @version $Id: ConnectionMonitorStrategy.java, v 0.1 2017-02-21 12:06 tsui Exp $
  */

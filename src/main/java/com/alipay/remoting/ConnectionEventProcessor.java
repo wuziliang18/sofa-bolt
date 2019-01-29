@@ -17,7 +17,7 @@
 package com.alipay.remoting;
 
 /**
- * Process connection events.
+ * Process connection events.  处理连接的事件 建立或者断开
  * @author jiangping
  * @version $Id: ConnectionEventProcessor.java, v 0.1 Mar 5, 2016 11:01:07 AM tao Exp $
  */

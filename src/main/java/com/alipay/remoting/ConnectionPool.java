@@ -26,7 +26,8 @@ import com.alipay.remoting.log.BoltLoggerFactory;
 
 /**
  * Connection pool
- * 
+ * 连接池 个人理解一般业务应该是用到的 适用于客户端和服务端建立多个连接
+ * 会对连接做些操作 修改引用数 关闭连接等
  * @author xiaomin.cxm
  * @version $Id: ConnectionPool.java, v 0.1 Mar 8, 2016 11:04:54 AM xiaomin.cxm Exp $
  */
@@ -199,6 +200,7 @@ public class ConnectionPool implements Scannable {
     }
 
     /**
+     * 扫描连接是否可用
      * @see com.alipay.remoting.Scannable#scan()
      */
     @Override

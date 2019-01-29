@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A customized FutureTask which can record whether the run method has been called.
+ * 标记是否已经开始运行
  * @author tsui
  * @version $Id: RunStateRecordedFutureTask.java, v 0.1 2017-07-31 16:28 tsui Exp $
  */

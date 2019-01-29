@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * Select strategy from connection pool
- * 
+ * 从连接池选择连接策略
  * @author xiaomin.cxm
  * @version $Id: ConnectionSelectStrategy.java, v 0.1 Mar 14, 2016 11:06:57 AM xiaomin.cxm Exp $
  */

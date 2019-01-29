@@ -30,7 +30,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  * Server Idle handler.
  * 
  * In the server side, the connection will be closed if it is idle for a certain period of time.
- * 
+ * 超时处理
  * @author jiangping
  * @version $Id: ServerIdleHandler.java, v 0.1 Nov 3, 2015 05:23:19 PM tao Exp $
  */

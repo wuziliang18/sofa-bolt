@@ -23,6 +23,7 @@ import io.netty.util.Timer;
 
 /**
  * A singleton holder of the timer for timeout.
+ * 定时任务使用 包装了netty的HashedWheelTimer
  * 
  * @author jiangping
  * @version $Id: TimerHolder.java, v 0.1 2015-09-28 2:02:20 tao Exp $
