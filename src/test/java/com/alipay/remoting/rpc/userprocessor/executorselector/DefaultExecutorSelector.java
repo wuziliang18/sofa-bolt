@@ -29,7 +29,7 @@ import com.alipay.remoting.util.StringUtils;
 
 /**
  * Default Executor Selector
- *
+ * 线程池选择策略  很好的一个设计(不同业务使用不同线程池) 轻重分离
  * @author tsui
  * @version $Id: DefaultExecutorSelector.java, v 0.1 2017-04-24 15:51 tsui Exp $
  */
@@ -43,6 +43,7 @@ public class DefaultExecutorSelector implements UserProcessor.ExecutorSelector {
 
     public DefaultExecutorSelector(String chooseExecutorStr) {
         this.chooseExecutorStr = chooseExecutorStr;
+        //此处有疑问 设置是不是太小 不知道作什么用的++是单元测试代码
         this.executor0 = new ThreadPoolExecutor(1, 3, 60, TimeUnit.SECONDS,
             new ArrayBlockingQueue<Runnable>(4), new NamedThreadFactory("Rpc-specific0-executor"));
         this.executor1 = new ThreadPoolExecutor(1, 3, 60, TimeUnit.SECONDS,

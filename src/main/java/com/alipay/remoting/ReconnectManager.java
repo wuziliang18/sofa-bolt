@@ -27,7 +27,7 @@ import com.alipay.remoting.log.BoltLoggerFactory;
 
 /**
  * Reconnect manager.
- * 
+ * 重连管理器
  * @author yunliang.shi
  * @version $Id: ReconnectManager.java, v 0.1 Mar 11, 2016 5:20:50 PM yunliang.shi Exp $
  */

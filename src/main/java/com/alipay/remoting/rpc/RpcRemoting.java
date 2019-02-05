@@ -370,6 +370,7 @@ public abstract class RpcRemoting extends BaseRemoting {
 
     /**
      * @see com.alipay.remoting.BaseRemoting#createInvokeFuture(com.alipay.remoting.RemotingCommand, com.alipay.remoting.InvokeContext)
+     * 这个只能同步获取因为没穿listener
      */
     @Override
     protected InvokeFuture createInvokeFuture(RemotingCommand request, InvokeContext invokeContext) {

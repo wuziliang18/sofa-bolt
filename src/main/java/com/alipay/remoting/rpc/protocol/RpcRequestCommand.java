@@ -139,7 +139,7 @@ public class RpcRequestCommand extends RequestCommand {
 
     @Override
     public void deserializeContent(InvokeContext invokeContext) throws DeserializationException {
-        if (this.getRequestObject() == null) {
+        if (this.getRequestObject() == null) {//判断应该是防止重复解析??
             try {
                 if (this.getCustomSerializer() != null
                     && this.getCustomSerializer().deserializeContent(this)) {

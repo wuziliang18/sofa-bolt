@@ -23,90 +23,92 @@ import com.alipay.remoting.rpc.RequestCommand;
 import com.alipay.remoting.rpc.ResponseCommand;
 
 /**
- * Define custom serializers for command header and content.
+ * Define custom serializers for command header and content. 针对自定义协议中的 header 和
+ * content 进行序列化和反序列化
  * 
  * @author jiangping
  * @version $Id: CustomSerializer.java, v 0.1 2015-10-7 AM11:37:36 tao Exp $
  */
 public interface CustomSerializer {
-    /**
-     * Serialize the header of RequestCommand.
-     * 
-     * @param request
-     * @param invokeContext
-     * @return
-     * @throws CodecException
-     */
-    <T extends RequestCommand> boolean serializeHeader(T request, InvokeContext invokeContext)
-                                                                                              throws SerializationException;
+	/**
+	 * Serialize the header of RequestCommand.
+	 * 
+	 * @param request
+	 * @param invokeContext
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends RequestCommand> boolean serializeHeader(T request, InvokeContext invokeContext)
+			throws SerializationException;
 
-    /**
-     * Serialize the header of ResponseCommand.
-     *
-     * @param response
-     * @return
-     * @throws CodecException
-     */
-    <T extends ResponseCommand> boolean serializeHeader(T response) throws SerializationException;
+	/**
+	 * Serialize the header of ResponseCommand.
+	 *
+	 * @param response
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends ResponseCommand> boolean serializeHeader(T response) throws SerializationException;
 
-    /**
-     * Deserialize the header of RequestCommand.
-     *
-     * @param request
-     * @return
-     * @throws CodecException
-     */
-    <T extends RequestCommand> boolean deserializeHeader(T request) throws DeserializationException;
+	/**
+	 * Deserialize the header of RequestCommand.
+	 *
+	 * @param request
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends RequestCommand> boolean deserializeHeader(T request) throws DeserializationException;
 
-    /**
-     * Deserialize the header of ResponseCommand.
-     * 
-     * @param response
-     * @param invokeContext
-     * @return
-     * @throws CodecException
-     */
-    <T extends ResponseCommand> boolean deserializeHeader(T response, InvokeContext invokeContext)
-                                                                                                  throws DeserializationException;
+	/**
+	 * Deserialize the header of ResponseCommand.
+	 * 
+	 * @param response
+	 * @param invokeContext
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends ResponseCommand> boolean deserializeHeader(T response, InvokeContext invokeContext)
+			throws DeserializationException;
 
-    /**
-     * Serialize the content of RequestCommand.
-     *
-     * @param request
-     * @param invokeContext
-     * @return
-     * @throws CodecException
-     */
-    <T extends RequestCommand> boolean serializeContent(T request, InvokeContext invokeContext)
-                                                                                               throws SerializationException;
+	/**
+	 * Serialize the content of RequestCommand.
+	 *
+	 * @param request
+	 * @param invokeContext
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends RequestCommand> boolean serializeContent(T request, InvokeContext invokeContext)
+			throws SerializationException;
 
-    /**
-     * Serialize the content of ResponseCommand.
-     * 
-     * @param response
-     * @return
-     * @throws CodecException
-     */
-    <T extends ResponseCommand> boolean serializeContent(T response) throws SerializationException;
+	/**
+	 * Serialize the content of ResponseCommand.
+	 * 
+	 * @param response
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends ResponseCommand> boolean serializeContent(T response) throws SerializationException;
 
-    /**
-     * Deserialize the content of RequestCommand.
-     * 
-     * @param request
-     * @return
-     * @throws CodecException
-     */
-    <T extends RequestCommand> boolean deserializeContent(T request)
-                                                                    throws DeserializationException;
+	/**
+	 * Deserialize the content of RequestCommand. 
+	 * 解序列化 如果处理了返回true 默认的序列化就不在处理
+	 * 处理的结果一般凡在request中
+	 * 
+	 * @param request
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends RequestCommand> boolean deserializeContent(T request) throws DeserializationException;
 
-    /**
-     * Deserialize the content of ResponseCommand.
-     * 
-     * @param response
-     * @param invokeContext
-     * @return
-     * @throws CodecException
-     */
-    <T extends ResponseCommand> boolean deserializeContent(T response, InvokeContext invokeContext)
-                                                                                                   throws DeserializationException;
+	/**
+	 * Deserialize the content of ResponseCommand.
+	 * 
+	 * @param response
+	 * @param invokeContext
+	 * @return
+	 * @throws CodecException
+	 */
+	<T extends ResponseCommand> boolean deserializeContent(T response, InvokeContext invokeContext)
+			throws DeserializationException;
 }

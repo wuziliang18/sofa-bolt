@@ -45,15 +45,15 @@ import io.netty.util.Attribute;
 @Sharable
 public class ConnectionEventHandler extends ChannelDuplexHandler {
     private static final Logger     logger = BoltLoggerFactory.getLogger("ConnectionEvent");
-
+    //连接管理器
     private ConnectionManager       connectionManager;
-
+    //连接事件管理器
     private ConnectionEventListener eventListener;
-
+    //连接事件执行器
     private ConnectionEventExecutor eventExecutor;
-
+    //重连管理器
     private ReconnectManager        reconnectManager;
-
+    //全局开关
     private GlobalSwitch            globalSwitch;
 
     public ConnectionEventHandler() {

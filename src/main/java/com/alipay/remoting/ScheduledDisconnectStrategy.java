@@ -49,7 +49,7 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
     /** the connections threshold of each {@link Url#uniqueKey} */
     private static final int        CONNECTION_THRESHOLD   = ConfigManager.conn_threshold();
 
-    /** fresh select connections to be closed */
+    /** fresh select connections to be closed  要关闭的新选择连接 key是poolvalue */
     private Map<String, Connection> freshSelectConnections = new ConcurrentHashMap<String, Connection>();
 
     /** Retry detect period for ScheduledDisconnectStrategy*/
@@ -60,7 +60,7 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
 
     /**
      * Filter connections to monitor
-     *
+     * 筛选服务可用的连接和服务不可用的连接
      * @param connections
      */
     @Override
@@ -71,9 +71,10 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
 
         for (Connection connection : connections) {
             String serviceStatus = (String) connection.getAttribute(Configs.CONN_SERVICE_STATUS);
-            if (serviceStatus != null) {
+            if (serviceStatus != null) {//wuzl 不明白为啥不判断状态 是因为只有服务不可用的才打标签吗?
                 if (connection.isInvokeFutureMapFinish()
                     && !freshSelectConnections.containsValue(connection)) {
+                	//有连接状态 且执行完所有任务 并且不是要关闭的新选择连接
                     serviceOffConnections.add(connection);
                 }
             } else {
@@ -88,7 +89,7 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
 
     /**
      * Monitor connections and close connections with status is off
-     *
+     * 监控连接并关闭一些关闭状态的练级
      * @param connPools
      */
     @Override
@@ -102,6 +103,7 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
                     Map.Entry<String, RunStateRecordedFutureTask<ConnectionPool>> entry = iter
                         .next();
                     String poolKey = entry.getKey();
+                    //获取连接池  实际是线程跑完的结果
                     ConnectionPool pool = FutureTaskUtil.getFutureTaskResult(entry.getValue(),
                         logger);
 
@@ -112,14 +114,15 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
                     List<Connection> serviceOffConnections = filteredConnectons
                         .get(Configs.CONN_SERVICE_STATUS_OFF);
                     if (serviceOnConnections.size() > CONNECTION_THRESHOLD) {
+                    	//随机设置一个服务不可用 等待关闭
                         Connection freshSelectConnect = serviceOnConnections.get(random
                             .nextInt(serviceOnConnections.size()));
                         freshSelectConnect.setAttribute(Configs.CONN_SERVICE_STATUS,
                             Configs.CONN_SERVICE_STATUS_OFF);
-
+                        //弹出上一轮随机要关闭的服务
                         Connection lastSelectConnect = freshSelectConnections.remove(poolKey);
                         freshSelectConnections.put(poolKey, freshSelectConnect);
-
+                        //把上轮认为要关闭的插入到关闭列表中 需要等待任务都执行完
                         closeFreshSelectConnections(lastSelectConnect, serviceOffConnections);
 
                     } else {
@@ -134,7 +137,7 @@ public class ScheduledDisconnectStrategy implements ConnectionMonitorStrategy {
                                     serviceOnConnections.size(), CONNECTION_THRESHOLD);
                         }
                     }
-
+                    //循环关闭不可用连接
                     for (Connection offConn : serviceOffConnections) {
                         if (offConn.isFine()) {
                             offConn.close();

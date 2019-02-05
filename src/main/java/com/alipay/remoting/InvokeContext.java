@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /** 
  * Invoke context
- *
+ * 保存invoke上下文参数
  * @author tsui 
  * @version $Id: InvokeContext.java, v 0.1 2016-07-21 15:44 tsui Exp $
  */

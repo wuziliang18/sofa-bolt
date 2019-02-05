@@ -24,7 +24,7 @@ import com.alipay.remoting.rpc.ResponseCommand;
 /**
  * The default custom serializer, which does nothing. 
  * Extend this class and override the methods you want to custom.
- * 
+ * 留给开发者的扩展接口实际没有实现
  * @author jiangping
  * @version $Id: DefaultCustomSerializer.java, v 0.1 2015-10-8 AM11:09:49 tao Exp $
  */

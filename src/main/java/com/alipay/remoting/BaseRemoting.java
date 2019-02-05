@@ -47,7 +47,7 @@ public abstract class BaseRemoting {
 
     /**
      * Synchronous invocation
-     * 
+     * 同步调用
      * @param conn
      * @param request
      * @param timeoutMillis
@@ -58,6 +58,7 @@ public abstract class BaseRemoting {
     protected RemotingCommand invokeSync(final Connection conn, final RemotingCommand request,
                                          final int timeoutMillis) throws RemotingException,
                                                                  InterruptedException {
+    	//生成一个同步获取结果的future
         final InvokeFuture future = createInvokeFuture(request, request.getInvokeContext());
         conn.addInvokeFuture(future);
         try {
@@ -65,7 +66,7 @@ public abstract class BaseRemoting {
 
                 @Override
                 public void operationComplete(ChannelFuture f) throws Exception {
-                    if (!f.isSuccess()) {
+                    if (!f.isSuccess()) {//没有发送成功记得删除future
                         conn.removeInvokeFuture(request.getId());
                         future.putResponse(commandFactory.createSendFailedResponse(
                             conn.getRemoteAddress(), f.cause()));
@@ -82,6 +83,7 @@ public abstract class BaseRemoting {
             }
             logger.error("Exception caught when sending invocation, id={}", request.getId(), e);
         }
+        //等待结果
         RemotingCommand response = future.waitResponse(timeoutMillis);
 
         if (response == null) {
@@ -95,7 +97,7 @@ public abstract class BaseRemoting {
 
     /**
      * Invocation with callback.
-     * 
+     * 异步调用 这里是异步调用 做了 超时的一些处理 没有对正常返回值进行处理
      * @param conn
      * @param request
      * @param invokeCallback
@@ -109,7 +111,7 @@ public abstract class BaseRemoting {
         conn.addInvokeFuture(future);
 
         try {
-            //add timeout
+            //add timeout 超时处理
             Timeout timeout = TimerHolder.getTimer().newTimeout(new TimerTask() {
                 @Override
                 public void run(Timeout timeout) throws Exception {

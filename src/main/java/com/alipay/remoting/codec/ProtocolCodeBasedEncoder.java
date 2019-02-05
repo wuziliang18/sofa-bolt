@@ -31,7 +31,7 @@ import io.netty.util.Attribute;
 
 /**
  * Protocol code based newEncoder, the main newEncoder for a certain protocol, which is lead by one or multi bytes (magic code).
- *
+ * 编码器 实际是CommandEncoder 的代理类  根据不同协议选择不同编码器
  * Notice: this is stateless can be noted as {@link io.netty.channel.ChannelHandler.Sharable}
  * @author jiangping
  * @version $Id: ProtocolCodeBasedEncoder.java, v 0.1 2015-12-11 PM 7:30:30 tao Exp $

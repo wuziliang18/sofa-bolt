@@ -67,11 +67,13 @@ public interface InvokeFuture {
 
     /**
      * Execute the callback.
+     * 回调
      */
     void executeInvokeCallback();
 
     /**
      * Asynchronous execute the callback abnormally.
+     * 异步返回结果 这个时候都是有返回值的  如果超时也有超时信息
      */
     void tryAsyncExecuteInvokeCallbackAbnormally();
 

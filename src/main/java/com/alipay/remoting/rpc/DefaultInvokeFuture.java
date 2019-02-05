@@ -40,7 +40,9 @@ import io.netty.util.Timeout;
 
 /**
  * The default implementation of InvokeFuture.
- * 
+ * 利用countDownLatch实现
+ * 一个线程等待结果 一个线程设置结果
+ * 可以直接调用listener
  * @author jiangping
  * @version $Id: DefaultInvokeFuture.java, v 0.1 2015-9-27 PM6:30:22 tao Exp $
  */

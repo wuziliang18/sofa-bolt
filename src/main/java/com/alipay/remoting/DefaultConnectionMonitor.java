@@ -29,7 +29,7 @@ import com.alipay.remoting.util.RunStateRecordedFutureTask;
 
 /**
  *  A default connection monitor that handle connections with strategies
- *
+ * 监控处理连接的
  * @author tsui
  * @version $Id: DefaultConnectionMonitor.java, v 0.1 2017-02-21 12:09 tsui Exp $
  */
@@ -53,7 +53,7 @@ public class DefaultConnectionMonitor {
 
     /**
      * Start schedule task
-     *
+     * 执行定时任务
      */
     public void start() {
         /** initial delay to execute schedule task, unit: ms */
